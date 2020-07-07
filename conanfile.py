@@ -6,7 +6,7 @@ from conans.tools import replace_in_file
 class StringprepConan(ConanFile):
     name = "stringprep"
     description = "stringperp library from libidn1"
-    version = "20200705"
+    version = "20200611"
     license = "LGPL 2.1"
     url = "https://www.gnu.org/software/libidn/"
     settings = "os", "compiler", "build_type", "arch"
@@ -19,7 +19,7 @@ class StringprepConan(ConanFile):
     scm={
         "type": "git",
         "url": "https://git.savannah.gnu.org/git/libidn.git",
-        "revision": "86e84739c5186faf3722a0f42e1e2db27870b3a5" # 2.3.0 + fixes
+        "revision": "86e84739c5186faf3722a0f42e1e2db27870b3a5"
     }
 
     def build(self):
