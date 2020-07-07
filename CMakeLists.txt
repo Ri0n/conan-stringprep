@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-project(stringprep C)
+project(stringprep LANGUAGES C)
 
 add_library(stringprep
   lib/stringprep.c
