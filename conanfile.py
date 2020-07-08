@@ -12,7 +12,7 @@ class StringprepConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [False, True]}
     default_options = "shared=True"
-    generators = "cmake_find_package"
+    generators = "cmake"
     exports_sources = "CMakeLists.txt", "rfc3454.*"
 
     scm_to_conandata = True
