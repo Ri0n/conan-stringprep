@@ -8,7 +8,8 @@ class StringprepConan(ConanFile):
     description = "stringperp library from libidn1"
     version = "20200611"
     license = "LGPL 2.1"
-    url = "https://www.gnu.org/software/libidn/"
+    url = "https://github.com/Ri0n/conan-stringprep"
+    homepage = "https://www.gnu.org/software/libidn"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [False, True]}
     default_options = "shared=True"
