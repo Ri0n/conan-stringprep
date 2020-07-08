@@ -24,14 +24,21 @@ class StringprepConan(ConanFile):
     }
 
     def build(self):
+        if self.settings.compiler == "Visual Studio":
+            ssize_h = """#include <BaseTsd.h>
+            typedef SSIZE_T ssize_t;"""
+        else:
+            ssize_h = ''
+            with open(os.path.join(self.build_folder, 'config.h'), 'w') as f:
+                f.write('')
+        os.remove(os.path.join(self.build_folder, 'GNUmakefile'))
         p = os.path.join(self.build_folder, 'lib')
         for f in ['unistr', 'unitypes']:
             os.rename(os.path.join(p, 'gl', f + '.in.h'), os.path.join(p, f + '.h'))
             
-        replace_in_file('lib/stringprep.h', '# include <idn-int.h>', """
+        replace_in_file('lib/stringprep.h', '# include <idn-int.h>', f"""
 #include <stdint.h>
-#include <BaseTsd.h>
-typedef SSIZE_T ssize_t;
+{ssize_h}
 """)
         cmake = CMake(self) # it will find the packages by using our auto-generated FindXXX.cmake files
         cmake.configure([])
@@ -42,6 +49,8 @@ typedef SSIZE_T ssize_t;
         self.copy("stringprep.h", dst="include", src="lib")
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.lib", dst="lib", keep_path=False)
+        self.copy("*.a", dst="lib", keep_path=False)
+        self.copy("*.so", dst="lib", keep_path=False)
     
     def package_info(self):
         if self.settings.compiler == "Visual Studio":
